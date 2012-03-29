@@ -1,0 +1,74 @@
+{% extends "sfapp/base.html" %}
+{% load staticfiles %}
+
+{% block title %}The News Without Transparency | Sunlight Foundation{% endblock %}
+
+{% block css %}
+    <style>
+        h1 { font-family: sans-serif; font-size: 260%; margin-bottom: 0.5em; }
+        h2 { font-size: 140%; line-height: 120%; margin-bottom: 0.5em; }
+        span.redacted {
+            background-color: #000;
+            color: #333;
+            display: inline-block;
+            padding: 0.3em 0.2em;
+        }
+        p.intro { font-family: serif; line-height: 1.5em; }
+        .alert { background-color: #d9dcc1; font-size: 120%; }
+        ul.posts { list-style: none; margin: 0; padding: 0; }
+        ul.posts li {
+            float: left;
+            padding: 1em;
+            width: 260px;
+        }
+        ul.posts li:hover { background-color: rgba(255, 255, 255, 0.4); }
+        ul.posts img {
+            border: 1px solid #666;
+            float: left;
+            height: 160px;
+            margin-right: 1em;
+            width: 120px;
+        }
+        ul.posts a small { color: #C9A706; }
+        ul.posts a:hover h2 { text-decoration: underline; }
+        ul.posts a:hover { text-decoration: none; }
+    </style>
+{% endblock %}
+
+{% block js %}
+    <script>
+        $(document).ready(function() {
+            var $posts = $('ul.posts')
+            var $firstPost = $posts.find('li').first();
+            $posts.append($firstPost.clone());
+            $posts.append($firstPost.clone());
+            $posts.append($firstPost.clone());
+            $posts.append($firstPost.clone());
+        });
+    </script>
+{% endblock %}
+
+{% block container %}
+    <h1>The News Without <span class="redacted">Transparency</span></h1>
+    <div class="row">
+        <div class="span8">
+            <p class="intro alert">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+            </p>
+        </div>
+        <div class="span4">
+            <p>sharing buttons</p>
+        </div>
+    </div>
+    <ul class="posts">
+        {% for post in posts %}
+            <li>
+                <a href="{{ post.url }}">
+                    <img src="{{ post.thumbnail.url }}">
+                    <h2>{{ post.title }}</h2>
+                    <small>{{ post.date_posted|date:"F j, Y" }}</small>
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
