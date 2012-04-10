@@ -62,6 +62,8 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'sfapp',
     'redacted',
+    'storages',
+    'gunicorn',
 )
 
 # A sample logging configuration. The only tangible logging

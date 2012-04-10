@@ -1,2 +1,7 @@
+psycopg2
+boto
+gunicorn
+
 Django==1.4
-django-sfapp
+django-storages
+-e git://github.com/sunlightlabs/sfapp.git#egg=sfapp
