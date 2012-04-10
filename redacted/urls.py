@@ -15,6 +15,7 @@ class RedactedView(ListView):
 urlpatterns = patterns('',
     url(r'^$', RedactedView.as_view()),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'', include('sfapp.urls')),
 )
 
 if settings.DEBUG:
