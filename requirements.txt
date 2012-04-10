@@ -1,3 +1,4 @@
+PIL
 psycopg2
 boto
 gunicorn
