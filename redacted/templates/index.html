@@ -4,64 +4,71 @@
 {% block title %}The News Without Transparency | Sunlight Foundation{% endblock %}
 
 {% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/jquery.lightbox-0.4.css" media="screen" />
     <style>
-        h1 { font-family: sans-serif; font-size: 260%; margin-bottom: 0.5em; }
-        h2 { font-size: 140%; line-height: 120%; margin-bottom: 0.5em; }
-        span.redacted {
-            background-color: #000;
-            color: #333;
-            display: inline-block;
-            padding: 0.3em 0.2em;
-        }
-        p.intro { font-family: serif; line-height: 1.5em; }
+        h1 { background: url({{ STATIC_URL }}img/logo_newsNoTransparency.png) top left no-repeat; width: 294px; height: 108px; margin-right: 30px;}
+        h2 { font-size: 150%; line-height: 120%; margin-bottom: 0.5em; text-transform: capitalize;}
+        p.intro { font-size: 110%; line-height: 22px; margin-top: 20px; width: 600px;}
         .alert { background-color: #d9dcc1; font-size: 120%; }
         ul.posts { list-style: none; margin: 0; padding: 0; }
         ul.posts li {
             float: left;
-            padding: 1em;
+            padding: 25px;
             width: 260px;
         }
         ul.posts li:hover { background-color: rgba(255, 255, 255, 0.4); }
         ul.posts img {
-            border: 1px solid #666;
+            border: 1px solid #d4cfc6;
             float: left;
             height: 160px;
             margin-right: 1em;
             width: 120px;
         }
-        ul.posts a small { color: #C9A706; }
+        .posts li h2 { margin-top: 20px;}
         ul.posts a:hover h2 { text-decoration: underline; }
         ul.posts a:hover { text-decoration: none; }
     </style>
 {% endblock %}
 
 {% block js %}
+    {{ block.super }}
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.lightbox-0.4.js"></script>
     <script>
         $(document).ready(function() {
-
+            
         });
+        $(function() {
+            $('a.lightbox').lightBox();
+        });
+        
     </script>
 {% endblock %}
 
 {% block container %}
-    <h1>The News Without <span class="redacted">Transparency</span></h1>
     <div class="row">
-        <div class="span8">
-            <p class="intro alert">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-            </p>
+        <div class="span10 module ">
+            <h1 class="withTip textReplace">The News Without Transparency</h1>
+            <p class="intro">Giving you a glimpse of what the news would look like in a world where government wasn't forced to provide public access to information through laws and regulations.</p>
         </div>
-        <div class="span4">
-            <p>sharing buttons</p>
+        <div class="span2">
+            <div id="shareBtns">
+                <ul>
+                    <li id="youTube"><a class="textReplace" href="#">You Tube</a></li>
+                    <li id="twitter"><a class="textReplace" href="#">Twitter</a></li>
+                    <li id="facebook"><a class="textReplace" href="#">Facebook</a></li>
+                </ul>    
+            </div>
         </div>
     </div>
     <ul class="posts">
         {% for post in posts %}
             <li>
-                <a href="{{ post.url }}">
+                <a class="lightbox" href="/static/img/logo_newsNoTransparency.png">
                     <img src="{{ post.thumbnail.url }}">
-                    <h2>{{ post.title }}</h2>
-                    <small>{{ post.date_posted|date:"F j, Y" }}</small>
+                    <h2 class="withTip">{{ post.title }}</h2>
+                    <span class="tip">{{ post.date_posted|date:"F j, Y" }}</span>
                 </a>
             </li>
         {% endfor %}
