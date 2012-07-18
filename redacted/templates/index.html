@@ -5,9 +5,15 @@
 
 {% block css %}
     {{ block.super }}
-    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/jquery.lightbox-0.4.css" media="screen" />
+    <link rel="stylesheet" href="{% static "fancybox/jquery.fancybox.css" %}" media="screen">
     <style>
-        h1 { background: url({{ STATIC_URL }}img/logo_newsNoTransparency.png) top left no-repeat; width: 294px; height: 108px; margin-right: 30px;}
+        h1 {
+            background: url({% static "img/logo_newsNoTransparency.png" %}) top left no-repeat;
+            height: 108px;
+            margin-right: 30px;
+            text-indent: -9999px;
+            width: 294px;
+        }
         h2 { font-size: 150%; line-height: 120%; margin-bottom: 0.5em; text-transform: capitalize;}
         p.intro { font-size: 110%; line-height: 22px; margin-top: 20px; width: 600px;}
         .alert { background-color: #d9dcc1; font-size: 120%; }
@@ -28,21 +34,19 @@
         .posts li h2 { margin-top: 20px;}
         ul.posts a:hover h2 { text-decoration: underline; }
         ul.posts a:hover { text-decoration: none; }
+        .modal { display: none; }
+        .scribd-embed { float: left; margin-right: 2em; width: 400px; }
     </style>
 {% endblock %}
 
 {% block js %}
     {{ block.super }}
-    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}js/jquery.lightbox-0.4.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script src="{% static "fancybox/jquery.fancybox.js" %}"></script>
     <script>
         $(document).ready(function() {
-            
+            $('.fancybox').fancybox({autoSize: false, height: 500, width: 700});
         });
-        $(function() {
-            $('a.lightbox').lightBox();
-        });
-        
     </script>
 {% endblock %}
 
@@ -58,17 +62,26 @@
                     <li id="youTube"><a class="textReplace" href="#">You Tube</a></li>
                     <li id="twitter"><a class="textReplace" href="#">Twitter</a></li>
                     <li id="facebook"><a class="textReplace" href="#">Facebook</a></li>
-                </ul>    
+                </ul>
             </div>
         </div>
     </div>
     <ul class="posts">
         {% for post in posts %}
             <li>
-                <a class="lightbox" href="/static/img/logo_newsNoTransparency.png">
+                <a class="fancybox fancybox.ajax" href="http://localhost:8000{% url post_detail post.pk %}">
                     <img src="{{ post.thumbnail.url }}">
                     <h2 class="withTip">{{ post.title }}</h2>
                     <span class="tip">{{ post.date_posted|date:"F j, Y" }}</span>
+                    <div class="modal">
+                        <div>
+                            <p class="title">{{ post.title }}</p>
+                            <p>{{ post.description }}</p>
+                            {% comment %}
+                                {{ post.scribd_embed|safe }}
+                            {% endcomment %}
+                        </div>
+                    </div>
                 </a>
             </li>
         {% endfor %}
