@@ -44,7 +44,30 @@
     <script src="{% static "fancybox/jquery.fancybox.js" %}"></script>
     <script>
         $(document).ready(function() {
-            $('.fancybox').fancybox({autoSize: false, height: 470, width: 700});
+            $('.fancybox').fancybox({autoSize: false, height: 500, width: 700});
+        });
+    </script>
+    <script src="http://cdn.gigya.com/js/socialize.js?apiKey=3_BLRB_2LlQJZDUW1wb9_ZOps-sOnnzA_e6xxNSwJBBGoB-SavmPAKHkaVVZPE5Kx8"></script>
+    <script>
+        $(document).ready(function() {
+
+            var ua = new gigya.socialize.UserAction();
+
+            ua.setLinkBack("http://redacted.sunlightfoundation.com/");
+            ua.setTitle("The News Without Transparency");
+            ua.setDescription("Giving you a glimpse of what the news would look like in a world where government wasn't forced to provide public access to information through laws and regulations.");
+
+            var params = {
+                containerID: 'share-buttons',
+                layout: 'horizontal',
+                shareButtons: 'facebook,twitter',
+                shortURLs: 'never',
+                showCounts: 'top',
+                userAction: ua
+            };
+
+            gigya.socialize.showShareBarUI(params);
+
         });
     </script>
 {% endblock %}
@@ -56,13 +79,7 @@
             <p class="intro">Giving you a glimpse of what the news would look like in a world where government wasn't forced to provide public access to information through laws and regulations.</p>
         </div>
         <div class="span2">
-            <div id="shareBtns">
-                <ul>
-                    <li id="youTube"><a class="textReplace" href="#">You Tube</a></li>
-                    <li id="twitter"><a class="textReplace" href="#">Twitter</a></li>
-                    <li id="facebook"><a class="textReplace" href="#">Facebook</a></li>
-                </ul>
-            </div>
+            <div id="share-buttons"></div>
         </div>
     </div>
     <ul class="posts">
