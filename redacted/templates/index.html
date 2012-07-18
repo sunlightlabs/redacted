@@ -34,8 +34,7 @@
         .posts li h2 { margin-top: 20px;}
         ul.posts a:hover h2 { text-decoration: underline; }
         ul.posts a:hover { text-decoration: none; }
-        .modal { display: none; }
-        .scribd-embed { float: left; margin-right: 2em; width: 400px; }
+        .scribd-embed { background-color: #ddd; float: left; margin-right: 2em; width: 400px; height: 400px; }
     </style>
 {% endblock %}
 
@@ -45,7 +44,7 @@
     <script src="{% static "fancybox/jquery.fancybox.js" %}"></script>
     <script>
         $(document).ready(function() {
-            $('.fancybox').fancybox({autoSize: false, height: 500, width: 700});
+            $('.fancybox').fancybox({autoSize: false, height: 470, width: 700});
         });
     </script>
 {% endblock %}
@@ -73,15 +72,6 @@
                     <img src="{{ post.thumbnail.url }}">
                     <h2 class="withTip">{{ post.title }}</h2>
                     <span class="tip">{{ post.date_posted|date:"F j, Y" }}</span>
-                    <div class="modal">
-                        <div>
-                            <p class="title">{{ post.title }}</p>
-                            <p>{{ post.description }}</p>
-                            {% comment %}
-                                {{ post.scribd_embed|safe }}
-                            {% endcomment %}
-                        </div>
-                    </div>
                 </a>
             </li>
         {% endfor %}
