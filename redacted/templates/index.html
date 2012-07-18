@@ -85,7 +85,7 @@
     <ul class="posts">
         {% for post in posts %}
             <li>
-                <a class="fancybox fancybox.ajax" href="http://localhost:8000{% url post_detail post.pk %}">
+                <a class="fancybox fancybox.ajax" href="{% url post_detail post.pk %}">
                     <img src="{{ post.thumbnail.url }}">
                     <h2 class="withTip">{{ post.title }}</h2>
                     <span class="tip">{{ post.date_posted|date:"F j, Y" }}</span>
