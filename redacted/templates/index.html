@@ -35,6 +35,7 @@
         ul.posts a:hover h2 { text-decoration: underline; }
         ul.posts a:hover { text-decoration: none; }
         .scribd-embed { background-color: #ddd; float: left; margin-right: 2em; width: 400px; height: 400px; }
+        .share-buttons .facebook-like { margin-right: 1.3em; }
     </style>
 {% endblock %}
 
@@ -47,29 +48,7 @@
             $('.fancybox').fancybox({autoSize: false, height: 500, width: 700});
         });
     </script>
-    <script src="http://cdn.gigya.com/js/socialize.js?apiKey=3_BLRB_2LlQJZDUW1wb9_ZOps-sOnnzA_e6xxNSwJBBGoB-SavmPAKHkaVVZPE5Kx8"></script>
-    <script>
-        $(document).ready(function() {
-
-            var ua = new gigya.socialize.UserAction();
-
-            ua.setLinkBack("http://redacted.sunlightfoundation.com/");
-            ua.setTitle("The News Without Transparency");
-            ua.setDescription("Giving you a glimpse of the news in a world without public access to government information.");
-
-            var params = {
-                containerID: 'share-buttons',
-                layout: 'horizontal',
-                shareButtons: 'facebook,twitter',
-                shortURLs: 'never',
-                showCounts: 'top',
-                userAction: ua
-            };
-
-            gigya.socialize.showShareBarUI(params);
-
-        });
-    </script>
+    <script src="https://s3.amazonaws.com/assets.sunlightfoundation.com/social/scripts/simple-socialite-pack.min.js" async></script>
 {% endblock %}
 
 {% block container %}
@@ -79,7 +58,12 @@
             <p class="intro">Giving you a glimpse of the news in a world without public access to government information.</p>
         </div>
         <div class="span2">
-            <div id="share-buttons"></div>
+            <div class="share-buttons module"
+				data-socialite="auto"
+				data-services="twitter-tweet,facebook-like,googleplus-one"
+				data-options="linkBack=http://redacted.sunlightfoundation.com/&amp;width=100&amp;text=A glimpse of the news in a world without access to government information&amp;showCounts=right"
+				data-facebook-like-options="layout=button_count"
+				data-twitter-tweet-options="via=sunfoundation"></div>
         </div>
     </div>
     <ul class="posts">
