@@ -9,7 +9,7 @@ class Post(models.Model):
     description = models.TextField(blank=True)
     scribd_embed = models.TextField(blank=True)
     date_posted = models.DateField(default=datetime.date.today)
-    url = models.URLField(verify_exists=False)
+    url = models.URLField()
     thumbnail = models.ImageField(upload_to='thumbnails')
 
     class Meta:
