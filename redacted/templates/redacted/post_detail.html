@@ -1,4 +1,4 @@
 <h4>{{ post.title }}</h4>
 <div class="scribd-embed">{% if post.scribd_embed %}{{ post.scribd_embed|safe }}{% else %}&nbsp;{% endif %}</div>
-<p>{{ post.description }}</p>
+<p>{{ post.description|safe }}</p>
 <p><a href="{{ post.url }}">Read full post</a></p>

@@ -1,81 +1,81 @@
-{% extends "sfapp/base.html" %}
+{% extends "sfapp/django/base.html" %}
 {% load staticfiles %}
 
 {% block title %}The News Without Transparency | Sunlight Foundation{% endblock %}
 
 {% block css %}
-    {{ block.super }}
-    <link rel="stylesheet" href="{% static "fancybox/jquery.fancybox.css" %}" media="screen">
-    <style>
-        h1 {
-            background: url({% static "img/logo_newsNoTransparency.png" %}) top left no-repeat;
-            height: 108px;
-            margin-right: 30px;
-            text-indent: -9999px;
-            width: 294px;
-        }
-        h2 { font-size: 150%; line-height: 120%; margin-bottom: 0.5em; text-transform: capitalize;}
-        p.intro { font-size: 110%; line-height: 22px; margin-top: 20px; width: 600px;}
-        .alert { background-color: #d9dcc1; font-size: 120%; }
-        ul.posts { list-style: none; margin: 0; padding: 0; }
-        ul.posts li {
-            float: left;
-            padding: 25px;
-            width: 260px;
-        }
-        ul.posts li:hover { background-color: rgba(255, 255, 255, 0.4); }
-        ul.posts img {
-            border: 1px solid #d4cfc6;
-            float: left;
-            height: 160px;
-            margin-bottom: 2em;
-            margin-right: 1em;
-            width: 120px;
-        }
-        .posts li h2 { margin-top: 20px;}
-        ul.posts a:hover h2 { text-decoration: underline; }
-        ul.posts a:hover { text-decoration: none; }
-        .scribd-embed { background-color: #ddd; float: left; margin-right: 2em; width: 400px; height: 400px; }
-        .share-buttons .facebook-like { margin-right: 1.3em; }
-    </style>
+	{{ block.super }}
+	<link rel="stylesheet" href="{% static "fancybox/jquery.fancybox.css" %}" media="screen">
+	<style>
+		h1 {
+			background: url({% static "img/logo_newsNoTransparency.png" %}) top left no-repeat;
+			height: 108px;
+			margin-right: 30px;
+			text-indent: -9999px;
+			width: 294px;
+		}
+		h2 { font-size: 150%; line-height: 120%; margin-bottom: 0.5em; text-transform: capitalize;}
+		p.intro { font-size: 110%; line-height: 22px; margin-top: 20px; max-width: 600px;}
+		.alert { background-color: #d9dcc1; font-size: 120%; }
+		ul.posts { list-style: none; margin: 0; padding: 0; }
+		ul.posts li {
+			float: left;
+			padding: 25px;
+			width: 300px;
+		}
+		ul.posts li:hover { background-color: rgba(255, 255, 255, 0.4); }
+		ul.posts img {
+			border: 1px solid #d4cfc6;
+			float: left;
+			height: 160px;
+			margin-bottom: 2em;
+			margin-right: 1em;
+			width: 120px;
+		}
+		.posts li h2 { margin-top: 20px;}
+		ul.posts a:hover h2 { text-decoration: underline; }
+		ul.posts a:hover { text-decoration: none; }
+		.scribd-embed { background-color: #ddd; float: left; margin-right: 2em; width: 400px; height: 400px; }
+		.share-buttons .facebook-like { margin-right: 1.3em; }
+	</style>
 {% endblock %}
 
 {% block js %}
-    {{ block.super }}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-    <script src="{% static "fancybox/jquery.fancybox.js" %}"></script>
-    <script>
-        $(document).ready(function() {
-            $('.fancybox').fancybox({autoSize: false, height: 500, width: 700});
-        });
-    </script>
-    <script src="https://s3.amazonaws.com/assets.sunlightfoundation.com/social/scripts/simple-socialite-pack.min.js" async></script>
+	{{ block.super }}
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script src="{% static "fancybox/jquery.fancybox.js" %}"></script>
+	<script>
+		$(document).ready(function() {
+			$('.fancybox').fancybox({autoSize: false, height: 500, width: 700});
+		});
+	</script>
+	<script src="https://s3.amazonaws.com/assets.sunlightfoundation.com/social/scripts/simple-socialite-pack.min.js" async></script>
 {% endblock %}
 
 {% block container %}
-    <div class="row">
-        <div class="span9 module ">
-            <h1 class="withTip textReplace">The News Without Transparency</h1>
-            <p class="intro">Giving you a glimpse of the news in a world without public access to government information.</p>
-        </div>
-        <div class="span3">
-            <div class="share-buttons module"
+	<div class="row">
+		<div class="col-md-9 module ">
+			<h1 class="withTip textReplace">The News Without Transparency</h1>
+			<p class="intro">Giving you a glimpse of the news in a world without public access to government information.</p>
+		</div>
+		<div class="col-md-3">
+			<div class="share-buttons module"
 				data-socialite="auto"
 				data-services="twitter-tweet,facebook-like,googleplus-one"
 				data-options="linkBack=http://redacted.sunlightfoundation.com/&amp;width=100&amp;text=A glimpse of the news in a world without access to government information&amp;showCounts=right"
 				data-facebook-like-options="layout=button_count"
 				data-twitter-tweet-options="via=sunfoundation"></div>
-        </div>
-    </div>
-    <ul class="posts">
-        {% for post in posts %}
-            <li>
-                <a class="fancybox fancybox.ajax" href="{% url post_detail post.pk %}">
-                    <img src="{{ post.thumbnail.url }}">
-                    <h2 class="withTip">{{ post.title }}</h2>
-                    <span class="tip">{{ post.date_posted|date:"F j, Y" }}</span>
-                </a>
-            </li>
-        {% endfor %}
-    </ul>
+		</div>
+	</div>
+	<ul class="posts">
+		{% for post in posts %}
+			<li>
+				<a class="fancybox fancybox.ajax" href="{% url 'post_detail' post.pk %}">
+					<img src="{{ post.thumbnail.url }}">
+					<h2 class="">{{ post.title }}</h2>
+					<span class="tip">{{ post.date_posted|date:"F j, Y" }}</span>
+				</a>
+			</li>
+		{% endfor %}
+	</ul>
 {% endblock %}

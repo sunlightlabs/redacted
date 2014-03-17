@@ -4,4 +4,5 @@ boto==2.27.0
 django-storages==1.1.8
 gunicorn==18.0
 psycopg2==2.5.2
+whitenoise==0.13
 -e git://github.com/sunlightlabs/sfapp.git#egg=sfapp
